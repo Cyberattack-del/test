@@ -9,7 +9,7 @@ const getUserAgentDetails = require('./services/userAgent');
 const isBot = require('isbot');
 
 const app = express();
-app.set('trust proxy', 1);
+app.set('trust proxy', true);
 
 // Create logs directory and access log stream
 if (!fs.existsSync('logs')) fs.mkdirSync('logs');
