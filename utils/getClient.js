@@ -1,10 +1,9 @@
 function getClientIP(req) {
-  const xff = req.headers['x-forwarded-for'];
-  const ip = xff ? xff.split(',')[0].trim() : (
-    req.connection?.remoteAddress || 
-    req.socket?.remoteAddress || 
-    req.ip || 'Unknown'
-  );
+  const ip = req.headers['cf-connecting-ip'] ||
+             (req.headers['x-forwarded-for'] ? req.headers['x-forwarded-for'].split(',')[0].trim() : null) ||
+             req.connection?.remoteAddress ||
+             req.socket?.remoteAddress ||
+             req.ip || 'Unknown';
 
   return normalizeIP(ip);
 }
