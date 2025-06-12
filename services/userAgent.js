@@ -1,17 +1,27 @@
 const UAParser = require('ua-parser-js');
 
-function getUserAgentDetails(userAgentString) {
-  const parser = new UAParser(userAgentString);
+function getUserAgentDetails(userAgent) {
+  if (!userAgent) {
+    return {
+      deviceType: 'Unknown',
+      device: 'Unknown',
+      os: 'Unknown',
+      osVersion: '',
+      browser: 'Unknown',
+      browserVersion: ''
+    };
+  }
+
+  const parser = new UAParser(userAgent);
   const result = parser.getResult();
 
   return {
-    browser: result.browser.name || 'Unknown',
-    browserVersion: result.browser.version || 'Unknown',
-    os: result.os.name || 'Unknown',
-    osVersion: result.os.version || 'Unknown',
-    device: result.device.model || 'Desktop',
-    deviceType: result.device.type || 'Computer',
-    engine: result.engine.name || 'Unknown'
+    deviceType: result.device?.type || 'Desktop',
+    device: result.device?.model || 'Unknown',
+    os: result.os?.name || 'Unknown',
+    osVersion: result.os?.version || '',
+    browser: result.browser?.name || 'Unknown',
+    browserVersion: result.browser?.version || '',
   };
 }
 
