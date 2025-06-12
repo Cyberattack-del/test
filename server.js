@@ -25,7 +25,9 @@ app.get('/', async (req, res) => {
   console.log(`Parsed UA:`, uaDetails);
 
   await sendTelegramAlert(
-    `🚨 New Access\nIP: ${ip}\nCountry: ${geo.country_name}\nCity: ${geo.city}\nBrowser: ${uaDetails.browser} ${uaDetails.browserVersion}\nOS: ${uaDetails.os} ${uaDetails.osVersion}`
+//         `🚨 New Access\nIP:
+//  ` );
+    `🚨 New Access\nIP:  ${ip}\nCountry: ${geo.country}\nRegion: ${geo.region}\nCity: ${geo.city}\nLat: ${geo.latitude} Long: ${geo.longitude}${ip}\nCountry: ${geo.country_name}\nCity: ${geo.city}\nBrowser: ${uaDetails.browser} ${uaDetails.browserVersion}\nOS: ${uaDetails.os} ${uaDetails.osVersion}`
   );
 
   res.send(`Hello! Your IP is: ${ip} (${geo.country_name} / ${geo.city})`);
@@ -33,6 +35,8 @@ app.get('/', async (req, res) => {
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+
+
 // require('dotenv').config();
 // const express = require('express');
 // const { getClientIP } = require('./utils/getClient');

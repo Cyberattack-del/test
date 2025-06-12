@@ -1,5 +1,3 @@
-// geoLocation.js (in services folder)
-
 const geoip = require('geoip-lite');
 
 function getGeoLocation(ip) {
